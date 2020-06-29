@@ -7,17 +7,19 @@
 4. Skaffold
 
 ## Prerequisite
-We use the `posts.com` domain name to point to the Kubernetes cluster.
+1. Setup the environment keys using `kubectl create secret generic jwt-secret --from-literal=JWT_KEY=<SECRET_KEY>`
 
-Go to:
-```
-Windows:
-C:\Windows\System32\drivers\etc\hosts
+2. We use the `posts.com` domain name to point to the Kubernetes cluster.
 
-Mac/Linux:
-/etc/hosts
-```
-Paste `127.0.0.1 ticketing.dev` at the bottom of the `hosts` file.
+    Go to:
+    ```
+    Windows:
+    C:\Windows\System32\drivers\etc\hosts
+
+    Mac/Linux:
+    /etc/hosts
+    ```
+    Paste `127.0.0.1 ticketing.dev` at the bottom of the `hosts` file.
 
 ## Start Application
 
