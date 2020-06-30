@@ -9,8 +9,12 @@ spec:
   rules:
     - host: ticketing.dev
       http:
-        paths:
+        paths: # Matches in order
           - path: /api/users/?(.*)
             backend:
               serviceName: auth-srv
+              servicePort: 3000
+          - path: /?(.*) # This will match all
+            backend:
+              serviceName: client-srv
               servicePort: 3000

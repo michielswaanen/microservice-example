@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment # Deployment creates a pod for us
 metadata:
   name: auth-mongo-depl
-spec:
+spec: # What's inside the node
   replicas: 1
   selector: # Deployment will search for this label
     matchLabels:
