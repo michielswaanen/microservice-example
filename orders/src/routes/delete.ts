@@ -24,6 +24,7 @@ router.delete('/api/orders/:orderId', async (req: Request, res: Response) => {
 
     new OrderCancelledPublisher(natsWrapper.client).publish({
         id: order.id,
+        version: order.version,
         ticket: {
             id: order.ticket.id     // order.ticket is not an id, it's a ref. Tt must be populated to get the id
         }

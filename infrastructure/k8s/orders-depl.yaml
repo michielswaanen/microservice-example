@@ -27,6 +27,8 @@ spec:
               value: 'ticketing'
             - name: NATS_URL
               value: 'http://nats-srv:4222'
+            - name: EXPIRATION_WINDOW_SECONDS
+              value: '900'
             - name: NATS_CLIENT_ID
               valueFrom:
                 fieldRef:
