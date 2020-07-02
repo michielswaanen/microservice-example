@@ -23,6 +23,10 @@ const start = async () => {
         throw new Error('NATS_CLIENT_ID must be defined');
     }
 
+    if(!process.env.EXPIRATION_WINDOW_SECONDS) {
+        throw new Error('EXPIRATION_WINDOW_SECONDS must be defined');
+    }
+
     try {
         // ClusterID that is defined in the nats-depl.yaml file
         await natsWrapper.connect(process.env.NATS_CLUSTER_ID, process.env.NATS_CLIENT_ID, process.env.NATS_URL);
