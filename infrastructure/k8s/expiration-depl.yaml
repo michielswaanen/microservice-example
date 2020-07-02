@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: expiration-depl
+  name: tickets-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: expiration
+      app: tickets
   template:
     metadata:
       labels:
-        app: expiration
+        app: tickets
     spec:
       containers:
-        - name: expiration
-          image: michielswaanen/expiration
+        - name: tickets
+          image: michielswaanen/tickets
           env:
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
                   name: jwt-secret
                   key: JWT_KEY
-            - name: REDIS_HOST
-              value: 'expiration-redis-srv'
+            - name: MONGO_URI
+              value: 'mongodb://tickets-mongo-srv:27017/tickets'
             - name: NATS_CLUSTER_ID
               value: 'ticketing'
             - name: NATS_URL
@@ -31,3 +31,18 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name # Kubernetes Pod name used as unique NATS client id
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tickets-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: tickets
+  ports:
+    - name: tickets
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

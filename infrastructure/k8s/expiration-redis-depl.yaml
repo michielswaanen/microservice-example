@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment # Deployment creates a pod for us
+metadata:
+  name: expiration-redis-depl
+spec: # What's inside the node
+  replicas: 1
+  selector: # Deployment will search for this label
+    matchLabels:
+      app: expiration-redis
+  template: # Label given by the pod
+    metadata:
+      labels:
+        app: expiration-redis
+    spec: # What is inside the pod?
+      containers:
+        - name: expiration-redis
+          image: redis # Image on Docker Hub
+---
+apiVersion: v1
+kind: Service # Create a ClusterIP (service) to access the pods inside the cluster
+metadata:
+  name: expiration-redis-srv
+spec:
+  type: ClusterIP
+  selector: # Tells which pods the service will give us access to
+    app: expiration-redis # Find a pod(s) with the label..
+  ports: # Which port(s) will give us access to the pods
+    - name: db # Give a name for logging purpose
+      protocol: TCP
+      port: 6379
+      targetPort: 6379
