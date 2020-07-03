@@ -7,7 +7,7 @@ export default ({req}) => {
         const nameSpace = 'ingress-nginx';
         let clusterRoot = `http://${serviceName}.${nameSpace}.svc.cluster.local`;
 
-        if(process.env.NODE_ENV === 'TEST') {
+        if(process.env.NODE_ENV !== 'test') {
             clusterRoot = 'http://wwww.stadro.com/'
         }
 
