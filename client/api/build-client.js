@@ -12,7 +12,7 @@ export default ({req}) => {
         }
 
         return axios.create({
-            baseURL: clusterRoot,
+            baseURL: 'http://wwww.stadro.com/',
             headers: req.headers
             // Take the headers from the browser and send it to ingress-nginx
             // 1. Send the JWT cookie to ingress-nginx (must be done manually
