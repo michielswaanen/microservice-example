@@ -18,6 +18,8 @@ export default ({req}) => {
         });
     } else{
         // We are on the browser
-        return axios.create({});
+        return axios.create({
+            baseURL: '/'
+        });
     }
 };
