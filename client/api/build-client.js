@@ -5,14 +5,10 @@ export default ({req}) => {
         // We are on the server
         const serviceName = 'ingress-nginx-controller';
         const nameSpace = 'ingress-nginx';
-        let clusterRoot = `http://${serviceName}.${nameSpace}.svc.cluster.local`;
-
-        if(process.env.NODE_ENV !== 'test') {
-            clusterRoot = 'http://wwww.stadro.com/'
-        }
+        const clusterRoot = `http://${serviceName}.${nameSpace}.svc.cluster.local`;
 
         return axios.create({
-            baseURL: 'http://wwww.stadro.com/',
+            baseURL: clusterRoot,
             headers: req.headers
             // Take the headers from the browser and send it to ingress-nginx
             // 1. Send the JWT cookie to ingress-nginx (must be done manually
