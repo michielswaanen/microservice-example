@@ -5,7 +5,11 @@ export default ({req}) => {
         // We are on the server
         const serviceName = 'ingress-nginx-controller';
         const nameSpace = 'ingress-nginx';
-        const clusterRoot = `http://${serviceName}.${nameSpace}.svc.cluster.local`;
+        let clusterRoot = `http://${serviceName}.${nameSpace}.svc.cluster.local`;
+
+        if(process.env.NODE_ENV === 'TEST') {
+            clusterRoot = 'http://wwww.stadro.com/'
+        }
 
         return axios.create({
             baseURL: clusterRoot,
