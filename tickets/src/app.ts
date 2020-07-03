@@ -13,7 +13,7 @@ app.set('trust proxy', true); // Allows connection with the ClusterIP
 app.use(json());
 app.use(cookieSession({
     signed: false,
-    secure: process.env.NODE_ENV !== 'test'
+    secure: false //process.env.NODE_ENV !== 'test'
 }));
 app.use(currentUser);
 
