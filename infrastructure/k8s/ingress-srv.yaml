@@ -9,7 +9,11 @@ spec:
   rules:
     - host: ticketing.dev
       http:
-        paths: # Matches in order
+        paths:
+          - path: /api/payments/?(.*)
+            backend:
+              serviceName: payments-srv
+              servicePort: 3000
           - path: /api/users/?(.*)
             backend:
               serviceName: auth-srv
@@ -22,7 +26,7 @@ spec:
             backend:
               serviceName: orders-srv
               servicePort: 3000
-          - path: /?(.*) # This will match all
+          - path: /?(.*)
             backend:
               serviceName: client-srv
               servicePort: 3000
