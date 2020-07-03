@@ -1,20 +1,19 @@
-<<<<<<< HEAD:.github/workflows/deploy-manifest.yml
-#name: deploy-manifest
-#
-#on:
-#  push:
-#    branches:
-#      - master
-#    paths:
-#      - 'infrastructure/**'
-#
-#jobs:
-#  build:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v2
-#      - uses: digitalocean/action-doctl@v2
-#        with:
-#          token: ${{ secrets.DIGITAL_OCEAN_ACCESS_TOKEN_TICKETING }}
-#      - run: doctl kubernetes cluster kubeconfig save ticketing
-#      - run: kubectl apply -f infrastructure/k8s -f infrastructure/k8s-prod
+name: deploy-manifests
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'infrastructure/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITAL_OCEAN_ACCESS_TOKEN_TICKETING }}
+      - run: doctl kubernetes cluster kubeconfig save ticketing
+      - run: kubectl apply -f infrastructure/k8s && kubectl apply -f infrastructure/k8s-prod
