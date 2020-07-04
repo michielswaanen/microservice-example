@@ -19,7 +19,7 @@ AppComponent.getInitialProps = async (appContext) => {
     try {
          data = await client.get('/api/users/current-user');
     } catch(err) {
-        // console.log(err);
+        console.log(err);
     }
 
     if(data === 'Failed') {
