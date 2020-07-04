@@ -7,6 +7,8 @@ export default ({req}) => {
         const nameSpace = 'ingress-nginx';
         const clusterRoot = `http://${serviceName}.${nameSpace}.svc.cluster.local`;
 
+        console.log("CLUSTER ROOT", clusterRoot);
+
         return axios.create({
             baseURL: clusterRoot,
             headers: req.headers

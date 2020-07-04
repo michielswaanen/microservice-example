@@ -14,8 +14,20 @@ const AppComponent = ({ Component, pageProps, currentUser }) => {
 };
 
 AppComponent.getInitialProps = async (appContext) => {
-    // const client = buildClient(appContext.ctx);
-    // const {data} = await client.get('/api/users/current-user');
+    const client = buildClient(appContext.ctx);
+    let data = 'Failed';
+    try {
+         data = await client.get('/api/users/current-user');
+    } catch(err) {
+        // console.log(err);
+    }
+
+    if(data === 'Failed') {
+        console.log('Failed')
+    } else {
+        console.log(data.data);
+    }
+
 
     // Invoke the getInitialProps function from the Component (page) that will be loaded
     // getInitialProps must be done automatically since the AppComponent,
